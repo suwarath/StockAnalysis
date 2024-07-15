@@ -1,0 +1,7 @@
+pickle5
+mlflow
+yfinance
+ta
+gym
+matplotlib
+math
