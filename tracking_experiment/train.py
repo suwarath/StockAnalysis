@@ -1,17 +1,24 @@
 import mlflow
-from model1 import *
+import importlib
+from preprocess import *
+import pickle
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
-mlflow.set_experiment("stock_trade")
-mlflow.autolog()
+# mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+# mlflow.set_experiment("stock_trade_action")
+# mlflow.autolog()
 
+def save_model(self, file_path):
+        with open(file_path, 'wb') as file:
+            pickle.dump(self.q_table, file)
 
-def train(ticker, start_date, end_date, download_start, save_path):
-    data = process_data(ticker, download_start, end_date, start_date)
+def train_and_log_model(ticker, start_date, end_date, model, save_path):
+    data = process_data(ticker, start_date, end_date)
     num_episodes = len(data)
     
-    env = StockTradingEnv(ticker=ticker, start=download_start, end=end_date, real_start=start_date)
-    agent = QLearningAgent(env)
+    m = importlib.import_module(model)
+    
+    env = m.StockTradingEnv(ticker=ticker, start=start_date, end=end_date)
+    agent = m.QLearningAgent(env)
     episode_rewards = []
     for episode in range(num_episodes):
         state = env.reset()
@@ -36,13 +43,11 @@ def train(ticker, start_date, end_date, download_start, save_path):
         print(f"Final Net Worth: {final_net_worth}")
         print(f"Cumulative Return: {cumulative_return:.2f}%")
         
-        agent.save_model(save_path)
+        with open(save_path, 'wb') as file:
+            pickle.dump(agent.q_table, file)
         
+        mlflow.log_param('parameters', m.parameters)        
         mlflow.log_metric('final_net_worth', final_net_worth)
         mlflow.log_metric('cumulative_return', cumulative_return)
         
         mlflow.log_artifact(save_path)
-
-
-# if __name__ == '__main__':
-#     train()
