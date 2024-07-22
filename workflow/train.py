@@ -1,7 +1,7 @@
 import mlflow
 import importlib
-from preprocess import *
 import pickle
+from preprocess import *
 
 # mlflow.set_tracking_uri("http://127.0.0.1:5000/")
 # mlflow.set_experiment("stock_trade_action")
