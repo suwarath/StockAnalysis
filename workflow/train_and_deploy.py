@@ -30,7 +30,7 @@ def train_and_register_model(ticker, start_date, end_date, models, EXPERIMENT_NA
     
     logger.info(f'training data and register model for {ticker} from {start_date} to {end_date}')
     for model in models:
-        train_and_log_model(ticker, start_date, end_date, model, save_path = f"./models/{model}.bin")
+        train_and_log_model(ticker, start_date, end_date, model, save_path = f"./models/{model}")
         
     logger.info(f'selecting the best model')
     experiment = client.get_experiment_by_name(EXPERIMENT_NAME)

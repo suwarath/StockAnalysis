@@ -1,8 +1,10 @@
 import mlflow
 import importlib
 import pickle
-from preprocess import *
-
+import shutil
+shutil.copy("./workflow/preprocess.py", "./workflow/model_element/preprocess.py")
+from model_element.preprocess import *
+import shutil
 # mlflow.set_tracking_uri("http://127.0.0.1:5000/")
 # mlflow.set_experiment("stock_trade_action")
 # mlflow.autolog()
@@ -43,11 +45,12 @@ def train_and_log_model(ticker, start_date, end_date, model, save_path):
         print(f"Final Net Worth: {final_net_worth}")
         print(f"Cumulative Return: {cumulative_return:.2f}%")
         
-        with open(save_path, 'wb') as file:
+        with open(f"./workflow/model_element/qtable.bin", 'wb') as file:
             pickle.dump(agent.q_table, file)
+        shutil.copy(f"./workflow/{model}.py", "./workflow/model_element/model.py")
         
         mlflow.log_param('parameters', m.parameters)        
         mlflow.log_metric('final_net_worth', final_net_worth)
         mlflow.log_metric('cumulative_return', cumulative_return)
         
-        mlflow.log_artifact(save_path)
+        mlflow.log_artifact("./workflow/model_element/")

@@ -1,9 +1,7 @@
+flask
 pickle5
 mlflow
 yfinance
 ta
 gym
-matplotlib
-prefect
-pipenv
 datetime
