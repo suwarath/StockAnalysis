@@ -16,7 +16,7 @@ def calculate_obv(df):
         return np.array(obv)
 
 
-def process_data(ticker, start, end, download_start = None):
+def process_data(ticker, start, end):
     download_start = (dt.datetime.strptime(start, "%Y-%m-%d") - dt.timedelta(days = 60)).strftime('%Y-%m-%d')
     data = yf.download(ticker, start=download_start, end=end).reset_index()
     data['macd'] = MACD(data['Close']).macd()

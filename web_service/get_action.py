@@ -11,6 +11,8 @@ def load_and_get_action(json_data):
     end_date = (date + dt.timedelta(days=1)).strftime('%Y-%m-%d')
     data = yf.download(ticker, start=start_date, end=end_date).reset_index()
     data['macd'] = MACD(data['Close']).macd()
+    data['macd_signal'] = MACD(data['Close']).macd_signal()
+    data['macd_diff'] = MACD(data['Close']).macd_diff()
     data['obv'] = calculate_obv(data)
     target_date_data = data[data['Date'] == target_date].reset_index(drop = True)
 

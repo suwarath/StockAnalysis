@@ -3,15 +3,15 @@ import pandas as pd
 import pickle
 import gym
 from gym import spaces
-from preprocess import *
+from model_element.preprocess import *
 import math
 
-parameters = ['Close', 'Volume', 'macd', 'obv']
+parameters = ['Close', 'macd', 'macd_diff', 'macd_signal', 'obv']
 
 class StockTradingEnv(gym.Env):
     def __init__(self, ticker, start, end):
         self.data = process_data(ticker, start, end)
-        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(4,))
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(5,))
         self.action_space = spaces.Discrete(3)
         self.max_steps = len(self.data) - 1
         self.reset()
@@ -27,8 +27,10 @@ class StockTradingEnv(gym.Env):
     def _next_observation(self):
         obs = np.array([
             self.data['Close'][self.current_step],
-            self.data['Volume'][self.current_step],
+            # self.data['Volume'][self.current_step],
             self.data['macd'][self.current_step],
+            self.data['macd_diff'][self.current_step],
+            self.data['macd_signal'][self.current_step],
             self.data['obv'][self.current_step]
         ])
         return obs
@@ -76,13 +78,15 @@ class QLearningAgent:
         self.discount_factor = discount_factor
         self.exploration_rate = exploration_rate
         self.exploration_decay_rate = exploration_decay_rate
-        self.q_table = np.zeros((10, 10, 10, 10, env.action_space.n))
+        self.q_table = np.zeros((10, 10, 10, 10, 10, env.action_space.n))
 
     def _discretize_state(self, state):
         state_bounds = [
             (self.env.data['Close'].min(), self.env.data['Close'].max()),
-            (self.env.data['Volume'].min(), self.env.data['Volume'].max()),
+            # (self.env.data['Volume'].min(), self.env.data['Volume'].max()),
             (self.env.data['macd'].min(), self.env.data['macd'].max()),
+            (self.env.data['macd_diff'].min(), self.env.data['macd'].max()),
+            (self.env.data['macd_signal'].min(), self.env.data['macd'].max()),
             (self.env.data['obv'].min(), self.env.data['obv'].max())
         ]
         discrete_state = []

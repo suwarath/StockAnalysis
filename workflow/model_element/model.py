@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 import gym
 from gym import spaces
-from preprocess import *
+from model_element.preprocess import *
 import math
 
 parameters = ['Close', 'macd', 'macd_diff', 'macd_signal', 'obv']
