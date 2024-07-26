@@ -1,6 +1,0 @@
-flask
-gym==0.26.2
-mlflow==2.14.3
-pickleshare==0.7.5
-ta==0.11.0
-yfinance==0.2.40
