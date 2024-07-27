@@ -1,0 +1,15 @@
+{
+  "id": "076cb4d3-d183-4c98-87a6-b8ee31ca4678",
+  "name": "Stock Trade Action Project",
+  "description": null,
+  "dashboard": {
+    "name": "Stock Trade Action Project",
+    "panels": [],
+    "tabs": [],
+    "tab_id_to_panel_ids": {}
+  },
+  "team_id": null,
+  "date_from": null,
+  "date_to": null,
+  "created_at": "2024-07-27T22:48:58.518105"
+}

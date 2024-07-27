@@ -6,7 +6,7 @@ RUN pip install pipenv
 WORKDIR /app
 RUN mkdir model_element
 
-COPY ["/web_service/Pipfile", "/web_service/Pipfile.lock", "./"]
+COPY ["Pipfile", "Pipfile.lock", "./"]
 RUN pipenv install --system --deploy
 
 COPY ["/web_service/get_action.py", "./"]

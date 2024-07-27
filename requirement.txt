@@ -6,3 +6,4 @@ ta==0.11.0
 yfinance==0.2.40
 prefect
 pipenv
+evidently

@@ -9,6 +9,8 @@ gym = "==0.26.2"
 mlflow = "==2.14.3"
 ta = "==0.11.0"
 yfinance = "==0.2.40"
+evidently = "==0.4.32"
+pylint = "*"
 
 [dev-packages]
 

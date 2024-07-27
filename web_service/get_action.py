@@ -2,6 +2,13 @@ from flask import Flask, request, jsonify
 
 from model_element.preprocess import *
 from model_element.model import *
+
+from evidently.report import Report
+from evidently.metric_preset import DataDriftPreset, DataQualityPreset
+
+from evidently.ui.workspace import RemoteWorkspace
+from evidently.ui.dashboards import DashboardPanelCounter, DashboardPanelPlot, CounterAgg, PanelValue, PlotType, ReportFilter
+from evidently.renderers.html_widgets import WidgetSize
     
 def load_and_get_action(json_data):
     ticker = json_data['ticker']
@@ -36,7 +43,26 @@ def load_and_get_action(json_data):
     parm_dict = {}
     for i in parameters:
         parm_dict[i] = target_date_data.loc[0,i]
+        
+    ws = RemoteWorkspace("http://host.docker.internal:8000")
     
+    if ws.search_project("Stock Trade Action Project") == []:
+        project = ws.create_project("Stock Trade Action Project")
+        project.save()
+    else:
+        project = ws.search_project("Stock Trade Action Project")[0]  
+              
+    report = Report(metrics=[
+        DataQualityPreset()
+        ],
+        timestamp = dt.datetime.combine(date, dt.datetime.min.time())
+        )
+    
+    print(project.id)
+
+    report.run(reference_data=None, current_data=target_date_data)
+    ws.add_report(project.id, report)
+
     return target_date, action_mapping[action], state, parm_dict 
 
 app = Flask('get_trade_action')
