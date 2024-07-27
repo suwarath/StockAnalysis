@@ -5,6 +5,13 @@ name = "pypi"
 
 [packages]
 gym = "==0.26.2"
+flask = "*"
+ta = "==0.11.0"
+yfinance = "==0.2.40"
+mlflow = "==2.14.3"
+prefect = "*"
+evidently = "*"
+pylint = "*"
 
 [dev-packages]
 
