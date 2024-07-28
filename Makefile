@@ -24,6 +24,8 @@ deploy:
 	pipenv run python3 ./workflow/train_and_deploy.py AAPL 2023-01-01 2024-01-01 model1,model2
 
 service:
+	@echo "Downloading artifacts from registered model"
+	pipenv run python3 ./web_service/download_artifacts.py
 	@echo "Creating docker container for a web service"
 	pipenv run docker build -t get-trade-action-service:v1 .
 	pipenv run docker run -it --rm -p 9696:9696 --add-host=host.docker.internal:host-gateway get-trade-action-service:v1
