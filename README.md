@@ -1,7 +1,7 @@
 # Stock Analysis
 
 ## Objective
-The objective of this model is to develop a reinforcement learning (RL) system for making stock trading decisions (buy, sell, hold) based on historical and current stock data.
+The objective of this project is to develop a reinforcement learning (RL) system for making stock trading decisions (buy, sell, hold) based on historical and current stock data.
 
 1. **Environment:**
    A custom gym environment that simulates stock trading by providing observations such as stock prices, volume, MACD (Moving Average Convergence Divergence) indicators, and OBV (On-Balance Volume).
