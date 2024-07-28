@@ -19,7 +19,7 @@ The objective of this project is to develop a reinforcement learning (RL) system
 This model aims to make informed, data-driven trading decisions using technical indicators and reinforcement learning strategies.
 
 ## Tech Stack
-This project was developed locally and used the following tech stack for development
+This project uses the following tech stack for development
 * Python 3.11
 * Qlearning (gym)
 * Prefect
