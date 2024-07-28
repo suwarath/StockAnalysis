@@ -30,8 +30,6 @@ This project uses the following tech stack for development
 
 ## Prerequisites
 Ensure you have the following installed before running the project:
-## Prerequisites
-Ensure you have the following installed before running the project:
 
 1. **Python 3.11**  
    [Download and install Python 3.11](https://www.python.org/downloads/release/python-3110/)
