@@ -1,5 +1,12 @@
 from evidently.ui.workspace import Workspace
-from evidently.ui.dashboards import DashboardPanelCounter, DashboardPanelPlot, CounterAgg, PanelValue, PlotType, ReportFilter
+from evidently.ui.dashboards import (
+    PlotType,
+    CounterAgg,
+    PanelValue,
+    ReportFilter,
+    DashboardPanelPlot,
+    DashboardPanelCounter
+)
 from evidently.renderers.html_widgets import WidgetSize
 
 ws = Workspace("./monitoring/workspace")
@@ -9,12 +16,12 @@ if ws.search_project("Stock Trade Action Project") == []:
     project.save()
 else:
     project = ws.search_project("Stock Trade Action Project")[0]
-    
+
 project.dashboard.add_panel(
     DashboardPanelCounter(
         filter=ReportFilter(metadata_values={}, tag_values=[]),
         agg=CounterAgg.NONE,
-        title="Stock Trade Action Dashboard"
+        title="Stock Trade Action Dashboard",
     )
 )
 
@@ -26,7 +33,7 @@ project.dashboard.add_panel(
             PanelValue(
                 metric_id="DatasetSummaryMetric",
                 field_path="current.number_of_missing_values",
-                legend="count"
+                legend="count",
             ),
         ],
         plot_type=PlotType.LINE,

@@ -1,0 +1,27 @@
+[tool.pylint.MASTER]
+ignore-paths = [ "./.venv/",
+                 "./.vscode/",
+                 "./debug_file/"]
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-function-docstring",
+    "missing-final-newline",
+    "missing-class-docstring",
+    "missing-module-docstring",
+    "invalid-name",
+    "too-few-public-methods",
+    "import-error",
+    "wrong-import-position",
+    "possibly-used-before-assignment",
+    "line-too-long",
+    "logging-fstring-interpolation"]
+
+[tool.black]
+line-length = 80
+target-version = ['py311']
+
+[tool.isort]
+py_version = 311
+multi_line_output = 3
+length_sort = true

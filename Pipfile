@@ -12,6 +12,9 @@ mlflow = "==2.14.3"
 prefect = "*"
 evidently = "*"
 pylint = "*"
+black = "*"
+isort = "*"
+pytest = "*"
 
 [dev-packages]
 
