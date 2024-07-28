@@ -7,8 +7,6 @@ from model_element.model import parameters
 
 
 def test_docker():
-    input_json = ticker_info = {"ticker": "AAPL", "target_date": "2024-01-05"}
-
     ticker_info = {"ticker": "AAPL", "target_date": "2024-01-05"}
 
     url = "http://localhost:9696/get_action"

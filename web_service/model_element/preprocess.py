@@ -1,7 +1,6 @@
 import datetime as dt
 
 import numpy as np
-import pandas as pd
 import yfinance as yf
 from ta.trend import MACD
 

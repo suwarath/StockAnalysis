@@ -15,7 +15,17 @@ disable = [
     "wrong-import-position",
     "possibly-used-before-assignment",
     "line-too-long",
-    "logging-fstring-interpolation"]
+    "logging-fstring-interpolation",
+    "duplicate-code",
+    "wildcard-import",
+    "too-many-locals",
+    "ungrouped-imports",
+    "arguments-differ",
+    "attribute-defined-outside-init",
+    "abstract-method",
+    "too-many-instance-attributes",
+    "unused-wildcard-import"
+    ]
 
 [tool.black]
 line-length = 80

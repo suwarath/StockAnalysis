@@ -30,15 +30,15 @@ service:
 	pipenv run docker build -t get-trade-action-service:v1 .
 	pipenv run docker run -it --rm -p 9696:9696 --add-host=host.docker.internal:host-gateway get-trade-action-service:v1
 
-unittest:
+unit-test:
 	@echo "Running unit test"
 	pipenv run pytest ./unit_test/unit_test.py
 
-integrationtest:
+integration-test:
 	@echo "Runnign unit test"
 	pipenv run pytest ./integration_test/test_docker.py
 
-dummymonitoring:
+dummy-monitoring:
 	@echo "Running dummy data for evidently dashboard"
 	pipenv run python3 ./monitoring/dummy_monitoring.py  
 
@@ -51,7 +51,7 @@ format:
 clean:
 	@echo "Stoping all running docker"
 	rm -rf __pycache__
-	docker stop $(docker ps -q)
+	docker container ls -aq | xargs --no-run-if-empty docker container stop
 	@echo "Cleaning mlflow"
 	rm -rf mlflow.db
 	rm -rf mlruns
@@ -59,3 +59,6 @@ clean:
 	rm -rf ./monitoring/workspace/
 	@echo "Removing environment"
 	pipenv --rm
+	@echo "Don't forget to go to MLFlow terminal and press ctrl+c"
+	@echo "Don't forget to go to Prefect terminal and press ctrl+c"
+	@echo "Don't forget to go to Evidently terminal and press ctrl+c"

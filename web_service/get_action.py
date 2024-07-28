@@ -1,10 +1,11 @@
+import pickle
+
 from flask import Flask, jsonify, request
 from evidently.report import Report
-from model_element.model import *  # type: ignore
+from model_element.model import *
 from evidently.ui.workspace import RemoteWorkspace
-from evidently.metric_preset import DataDriftPreset, DataQualityPreset
-from model_element.preprocess import *  # type: ignore
-from evidently.renderers.html_widgets import WidgetSize
+from evidently.metric_preset import DataQualityPreset
+from model_element.preprocess import *
 
 
 def load_and_get_action(json_data):

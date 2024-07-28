@@ -1,9 +1,7 @@
 import math
-import pickle
 
 import gym
 import numpy as np
-import pandas as pd
 from gym import spaces
 from model_element.preprocess import *
 
@@ -136,8 +134,7 @@ class QLearningAgent:
         discrete_state = self._discretize_state(state)
         if np.random.rand() < self.exploration_rate:
             return self.env.action_space.sample()
-        else:
-            return np.argmax(self.q_table[discrete_state])
+        return np.argmax(self.q_table[discrete_state])
 
     def update_q_table(self, state, action, reward, next_state):
         state_index = self._discretize_state(state)

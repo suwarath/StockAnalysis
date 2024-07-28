@@ -67,13 +67,22 @@ def transition_model_stage():
 
 
 @flow
-def run():
-    ticker = sys.argv[1]
-    start_date = sys.argv[2]
-    end_date = sys.argv[3]
-    models = sys.argv[4].split(",")
-    train_and_register_model(ticker, start_date, end_date, models)
-    transition_model_stage()
+def run(
+    ticker: str = "AAPL",
+    start_date: str = "2023-01-01",
+    end_date: str = "2024-01-01",
+    models: str = "model1,model2",
+):
+    try:
+        ticker = sys.argv[1]
+        start_date = sys.argv[2]
+        end_date = sys.argv[3]
+        models = sys.argv[4]
+    finally:
+        train_and_register_model(
+            ticker, start_date, end_date, models.split(",")
+        )
+        transition_model_stage()
 
 
 if __name__ == "__main__":
